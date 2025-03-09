@@ -92,3 +92,7 @@ model recommendation{
   diet diet @relation(fields: [diet_id], references: [id])
   diet_id Int
 }
+
+model request {
+  id Int @id @default(autoincrement())
+}
