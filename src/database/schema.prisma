@@ -39,3 +39,8 @@ model illness {
   name String
   description String
 }
+
+model diet {
+  id Int @id @default(autoincrement())
+  name String
+}
