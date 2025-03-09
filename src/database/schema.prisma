@@ -60,3 +60,9 @@ model symptome {
   id Int @id @default(autoincrement())
   name String
 }
+
+model characteristic {
+  id Int @id @default(autoincrement())
+  intolerance String
+  preference String
+}
