@@ -14,6 +14,7 @@ model patient {
   password String
   height   Int
   weight   Int
+  characteristic characteristic? 
 }
 
 model doctor {
@@ -68,4 +69,6 @@ model characteristic {
   id          Int    @id @default(autoincrement())
   intolerance String
   preference  String
+  patient patient? @relation(fields: [patient_id], references: [id])
+  patient_id Int? @unique
 }
