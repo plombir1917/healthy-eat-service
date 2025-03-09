@@ -44,12 +44,15 @@ model illness {
   symptome    symptome[]
   patient patient? @relation(fields: [patient_id], references: [id])
   patient_id Int?
+  diet diet[]
 }
 
 model diet {
   id   Int    @id @default(autoincrement())
   name String
   process_map process_map[]
+  illness illness @relation(fields: [illness_id], references: [id])
+  illness_id Int
 }
 
 model process_map {
