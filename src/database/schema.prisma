@@ -34,3 +34,8 @@ model admin {
   password String
 }
 
+model illness {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+}
