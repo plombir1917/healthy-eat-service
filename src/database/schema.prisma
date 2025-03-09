@@ -49,6 +49,7 @@ model illness {
 model diet {
   id   Int    @id @default(autoincrement())
   name String
+  process_map process_map[]
 }
 
 model process_map {
@@ -60,6 +61,8 @@ model process_map {
   fats            Int
   carbohydrates   Int
   calories        Int
+  diet            diet? @relation(fields: [diet_id], references: [id])
+  diet_id         Int?
 }
 
 model symptome {
