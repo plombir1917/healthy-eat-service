@@ -29,6 +29,7 @@ model doctor {
   password     String
   admin admin @relation(fields: [admin_id], references: [id])
   admin_id Int
+  request request[]
 }
 
 model admin {
@@ -95,4 +96,6 @@ model recommendation{
 
 model request {
   id Int @id @default(autoincrement())
+  doctor doctor @relation(fields: [doctor_id], references: [id])
+  doctor_id Int
 }
