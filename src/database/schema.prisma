@@ -17,6 +17,7 @@ model patient {
   weight   Int
   characteristic characteristic? 
   illnes illness[]  
+  request request[]
 }
 
 model doctor {
@@ -98,4 +99,6 @@ model request {
   id Int @id @default(autoincrement())
   doctor doctor @relation(fields: [doctor_id], references: [id])
   doctor_id Int
+  patient patient @relation(fields: [patient_id], references: [id])
+  patient_id Int
 }
