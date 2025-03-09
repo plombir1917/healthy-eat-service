@@ -44,3 +44,14 @@ model diet {
   id Int @id @default(autoincrement())
   name String
 }
+
+model process_map {
+  id Int @id @default(autoincrement())
+  dish_name String
+  ingredients String
+  cooking_process String
+  proteins Int
+  fats Int
+  carbohydrates Int
+  calories Int
+}
