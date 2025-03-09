@@ -8,61 +8,64 @@ datasource db {
 }
 
 model patient {
-  id Int @id @default(autoincrement())
-  name String
-  login String @unique
-  password String 
-  height Int
-  weight Int
+  id       Int    @id @default(autoincrement())
+  name     String
+  login    String @unique
+  password String
+  height   Int
+  weight   Int
 }
 
 model doctor {
-  id Int @id @default(autoincrement())
-  name String
-  surname String
-  photo String
+  id           Int    @id @default(autoincrement())
+  name         String
+  surname      String
+  photo        String
   achievements String
-  login String @unique
-  password String
+  login        String @unique
+  password     String
 }
 
 model admin {
-  id Int @id @default(autoincrement())
-  name String
-  surname String
-  login String @unique
+  id       Int    @id @default(autoincrement())
+  name     String
+  surname  String
+  login    String @unique
   password String
 }
 
 model illness {
-  id Int @id @default(autoincrement())
-  name String
+  id          Int        @id @default(autoincrement())
+  name        String
   description String
+  symptome    symptome[]
 }
 
 model diet {
-  id Int @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
   name String
 }
 
 model process_map {
-  id Int @id @default(autoincrement())
-  dish_name String
-  ingredients String
+  id              Int    @id @default(autoincrement())
+  dish_name       String
+  ingredients     String
   cooking_process String
-  proteins Int
-  fats Int
-  carbohydrates Int
-  calories Int
+  proteins        Int
+  fats            Int
+  carbohydrates   Int
+  calories        Int
 }
 
 model symptome {
-  id Int @id @default(autoincrement())
-  name String
+  id         Int      @id @default(autoincrement())
+  name       String
+  illness    illness? @relation(fields: [illness_id], references: [id])
+  illness_id Int?
 }
 
 model characteristic {
-  id Int @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   intolerance String
-  preference String
+  preference  String
 }
