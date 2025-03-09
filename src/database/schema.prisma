@@ -25,3 +25,12 @@ model doctor {
   login String @unique
   password String
 }
+
+model admin {
+  id Int @id @default(autoincrement())
+  name String
+  surname String
+  login String @unique
+  password String
+}
+
