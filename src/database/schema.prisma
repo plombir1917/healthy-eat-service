@@ -53,6 +53,7 @@ model diet {
   process_map process_map[]
   illness illness @relation(fields: [illness_id], references: [id])
   illness_id Int
+  recommendation recommendation[]
 }
 
 model process_map {
@@ -85,4 +86,6 @@ model characteristic {
 
 model recommendation{
   id Int @id @default(autoincrement())
+  diet diet @relation(fields: [diet_id], references: [id])
+  diet_id Int
 }
