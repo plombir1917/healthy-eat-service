@@ -27,6 +27,8 @@ model doctor {
   achievements String
   login        String @unique
   password     String
+  admin admin @relation(fields: [admin_id], references: [id])
+  admin_id Int
 }
 
 model admin {
@@ -35,6 +37,7 @@ model admin {
   surname  String
   login    String @unique
   password String
+  doctor doctor[]
 }
 
 model illness {
