@@ -15,3 +15,13 @@ model patient {
   height Int
   weight Int
 }
+
+model doctor {
+  id Int @id
+  name String
+  surname String
+  photo String
+  achievements String
+  login String @unique
+  password String
+}
