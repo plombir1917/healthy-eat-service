@@ -1,4 +1,5 @@
 //TODO: unnecessary feilds
+// симптомы и заболевания mtm relation
 generator client {
   provider = "prisma-client-js"
 }
@@ -46,10 +47,20 @@ model illness {
   id          Int        @id @default(autoincrement())
   name        String
   description String
-  symptome    symptome[]
   patient patient? @relation(fields: [patient_id], references: [id])
   patient_id Int?
   diet diet[]
+  symptome illness_on_symptome[]
+}
+
+model  illness_on_symptome {
+  illness illness @relation(fields: [illness_id], references: [id])
+  illness_id Int
+
+  symptome symptome @relation(fields: [symptome_id], references: [id])
+  symptome_id Int
+
+  @@id([illness_id, symptome_id])
 }
 
 model diet {
@@ -77,8 +88,7 @@ model process_map {
 model symptome {
   id         Int      @id @default(autoincrement())
   name       String
-  illness    illness? @relation(fields: [illness_id], references: [id])
-  illness_id Int?
+  illness illness_on_symptome[]
 }
 
 model characteristic {
