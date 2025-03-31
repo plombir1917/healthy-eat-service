@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
+import { PatientRepository } from './patient.repository';
 
 @Injectable()
 export class PatientService {
-  create(createPatientDto: CreatePatientDto) {
-    return 'This action adds a new patient';
+  constructor(private readonly patientRepository: PatientRepository) {}
+
+  async create(createPatientDto: CreatePatientDto) {
+    return await this.patientRepository.create(createPatientDto);
   }
 
   findAll() {
@@ -14,6 +17,10 @@ export class PatientService {
 
   findOne(id: number) {
     return `This action returns a #${id} patient`;
+  }
+
+  async findOneByEmail(email: string) {
+    return await this.patientRepository.findOneByEmail(email);
   }
 
   update(id: number, updatePatientDto: UpdatePatientDto) {

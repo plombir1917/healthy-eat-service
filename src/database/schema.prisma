@@ -14,8 +14,8 @@ model patient {
   name     String
   login    String @unique
   password String
-  height   Int
-  weight   Int
+  height   Int?
+  weight   Int?
   characteristic characteristic? 
   illnes illness[]  
   request request[]
