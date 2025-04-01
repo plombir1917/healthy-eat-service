@@ -1,0 +1,117 @@
+//TODO: unnecessary feilds
+// симптомы и заболевания mtm relation
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model patient {
+  id       Int    @id @default(autoincrement())
+  name     String
+  login    String @unique
+  password String
+  height   Int?
+  weight   Int?
+  characteristic characteristic? 
+  illnes illness[]  
+  request request[]
+}
+
+model doctor {
+  id           Int    @id @default(autoincrement())
+  name         String
+  surname      String
+  photo        String
+  achievements String
+  login        String @unique
+  password     String
+  admin admin @relation(fields: [admin_id], references: [id])
+  admin_id Int
+  request request[]
+}
+
+model admin {
+  id       Int    @id @default(autoincrement())
+  name     String
+  surname  String
+  login    String @unique
+  password String
+  doctor doctor[]
+}
+
+model illness {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  patient patient? @relation(fields: [patient_id], references: [id])
+  patient_id Int?
+  diet diet[]
+  symptome illness_on_symptome[]
+}
+
+model  illness_on_symptome {
+  illness illness @relation(fields: [illness_id], references: [id])
+  illness_id Int
+
+  symptome symptome @relation(fields: [symptome_id], references: [id])
+  symptome_id Int
+
+  @@id([illness_id, symptome_id])
+}
+
+model diet {
+  id   Int    @id @default(autoincrement())
+  name String
+  process_map process_map[]
+  illness illness @relation(fields: [illness_id], references: [id])
+  illness_id Int
+  recommendation recommendation[]
+}
+
+model process_map {
+  id              Int    @id @default(autoincrement())
+  dish_name       String
+  ingredients     String
+  cooking_process String
+  proteins        Int
+  fats            Int
+  carbohydrates   Int
+  calories        Int
+  diet            diet? @relation(fields: [diet_id], references: [id])
+  diet_id         Int?
+}
+
+model symptome {
+  id         Int      @id @default(autoincrement())
+  name       String
+  illness illness_on_symptome[]
+}
+
+model characteristic {
+  id          Int    @id @default(autoincrement())
+  intolerance String
+  preference  String
+  patient patient? @relation(fields: [patient_id], references: [id])
+  patient_id Int? @unique
+}
+
+model recommendation{
+  id Int @id @default(autoincrement())
+  diet diet @relation(fields: [diet_id], references: [id])
+  diet_id Int
+  request request[]
+}
+
+model request {
+  id Int @id @default(autoincrement())
+  doctor doctor @relation(fields: [doctor_id], references: [id])
+  doctor_id Int
+  patient patient @relation(fields: [patient_id], references: [id])
+  patient_id Int
+  recommendation recommendation? @relation(fields: [recommendation_id], references: [id])
+  recommendation_id Int?
+}
