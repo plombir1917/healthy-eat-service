@@ -1,26 +1,29 @@
 import { Injectable } from '@nestjs/common';
+import { DietRepository } from './diet.repository';
 import { CreateDietDto } from './dto/create-diet.dto';
 import { UpdateDietDto } from './dto/update-diet.dto';
 
 @Injectable()
 export class DietService {
-  create(createDietDto: CreateDietDto) {
-    return 'This action adds a new diet';
+  constructor(private readonly dietRepository: DietRepository) {}
+
+  async create(createDietDto: CreateDietDto) {
+    return this.dietRepository.create(createDietDto);
   }
 
-  findAll() {
-    return `This action returns all diet`;
+  async findAll() {
+    return this.dietRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} diet`;
+  async findOne(id: number) {
+    return this.dietRepository.findOne(id);
   }
 
-  update(id: number, updateDietDto: UpdateDietDto) {
-    return `This action updates a #${id} diet`;
+  async update(id: number, updateDietDto: UpdateDietDto) {
+    return this.dietRepository.update(id, updateDietDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} diet`;
+  async remove(id: number) {
+    return this.dietRepository.remove(id);
   }
 }

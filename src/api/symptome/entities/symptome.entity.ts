@@ -1,1 +1,5 @@
-export class Symptome {}
+export class Symptome {
+  id: number;
+  name: string;
+  illness?: any[];
+}

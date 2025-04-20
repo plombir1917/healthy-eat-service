@@ -1,7 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ProcessMapService } from './process_map.service';
-import { CreateProcessMapDto } from './dto/create-process_map.dto';
-import { UpdateProcessMapDto } from './dto/update-process_map.dto';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { ProcessMapService } from './process-map.service';
+import { CreateProcessMapDto } from './dto/create-process-map.dto';
+import { UpdateProcessMapDto } from './dto/update-process-map.dto';
 
 @Controller('process-map')
 export class ProcessMapController {
@@ -23,7 +31,10 @@ export class ProcessMapController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProcessMapDto: UpdateProcessMapDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateProcessMapDto: UpdateProcessMapDto,
+  ) {
     return this.processMapService.update(+id, updateProcessMapDto);
   }
 

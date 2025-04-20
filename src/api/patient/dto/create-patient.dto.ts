@@ -3,6 +3,8 @@ import {
   IsNotEmpty,
   IsString,
   IsStrongPassword,
+  IsInt,
+  IsOptional,
 } from 'class-validator';
 
 export class CreatePatientDto {
@@ -15,4 +17,12 @@ export class CreatePatientDto {
 
   @IsStrongPassword()
   password: string;
+
+  @IsInt()
+  @IsOptional()
+  height?: number;
+
+  @IsInt()
+  @IsOptional()
+  weight?: number;
 }
