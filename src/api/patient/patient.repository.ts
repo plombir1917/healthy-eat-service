@@ -1,28 +1,47 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma.service';
+import { PrismaService } from '../../database/prisma.service';
 import { IRepository } from 'src/interface/repository.interface';
 import { CreatePatientDto } from './dto/create-patient.dto';
+import { UpdatePatientDto } from './dto/update-patient.dto';
 import { Patient } from './entities/patient.entity';
 
 @Injectable()
 export class PatientRepository implements IRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
   async create(createPatientDto: CreatePatientDto): Promise<Patient> {
-    return await this.prisma.patient.create({
+    return this.prisma.patient.create({
       data: createPatientDto,
     });
   }
 
-  async findOne(): Promise<any> {}
+  async findAll(): Promise<Patient[]> {
+    return this.prisma.patient.findMany();
+  }
+
+  async findOne(id: number): Promise<Patient | null> {
+    return this.prisma.patient.findUnique({
+      where: { id },
+    });
+  }
 
   async findOneByEmail(login: string) {
     return await this.prisma.patient.findUniqueOrThrow({ where: { login } });
   }
 
-  async findAll(): Promise<any> {}
+  async update(
+    id: number,
+    updatePatientDto: UpdatePatientDto,
+  ): Promise<Patient> {
+    return this.prisma.patient.update({
+      where: { id },
+      data: updatePatientDto,
+    });
+  }
 
-  async update(): Promise<any> {}
-
-  async delete(): Promise<any> {}
+  async delete(id: number): Promise<Patient> {
+    return this.prisma.patient.delete({
+      where: { id },
+    });
+  }
 }

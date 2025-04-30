@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CharacteristicService } from './characteristic.service';
 import { CreateCharacteristicDto } from './dto/create-characteristic.dto';
 import { UpdateCharacteristicDto } from './dto/update-characteristic.dto';
@@ -23,7 +31,10 @@ export class CharacteristicController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCharacteristicDto: UpdateCharacteristicDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCharacteristicDto: UpdateCharacteristicDto,
+  ) {
     return this.characteristicService.update(+id, updateCharacteristicDto);
   }
 

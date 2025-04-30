@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import { RecommendationRepository } from './recommendation.repository';
 import { CreateRecommendationDto } from './dto/create-recommendation.dto';
 import { UpdateRecommendationDto } from './dto/update-recommendation.dto';
 
 @Injectable()
 export class RecommendationService {
-  create(createRecommendationDto: CreateRecommendationDto) {
-    return 'This action adds a new recommendation';
+  constructor(
+    private readonly recommendationRepository: RecommendationRepository,
+  ) {}
+
+  async create(createRecommendationDto: CreateRecommendationDto) {
+    return this.recommendationRepository.create(createRecommendationDto);
   }
 
-  findAll() {
-    return `This action returns all recommendation`;
+  async findAll() {
+    return this.recommendationRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} recommendation`;
+  async findOne(id: number) {
+    return this.recommendationRepository.findOne(id);
   }
 
-  update(id: number, updateRecommendationDto: UpdateRecommendationDto) {
-    return `This action updates a #${id} recommendation`;
+  async update(id: number, updateRecommendationDto: UpdateRecommendationDto) {
+    return this.recommendationRepository.update(id, updateRecommendationDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} recommendation`;
+  async remove(id: number) {
+    return this.recommendationRepository.remove(id);
   }
 }

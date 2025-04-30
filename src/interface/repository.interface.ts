@@ -5,7 +5,7 @@ export interface IRepository {
 
   findOne(data: any): Promise<any>;
 
-  update(data: any): Promise<any>;
+  update(id: any, data: any): Promise<any>;
 
   delete(data: any): Promise<any>;
 }

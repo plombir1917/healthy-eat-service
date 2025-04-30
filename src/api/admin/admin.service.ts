@@ -1,26 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
+import { AdminRepository } from './admin.repository';
 
 @Injectable()
 export class AdminService {
+  constructor(private readonly adminRepository: AdminRepository) {}
+
   create(createAdminDto: CreateAdminDto) {
-    return 'This action adds a new admin';
+    try {
+      return this.adminRepository.create(createAdminDto);
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
   findAll() {
-    return `This action returns all admin`;
+    return this.adminRepository.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} admin`;
+    try {
+      return this.adminRepository.findOne(id);
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
   }
 
   update(id: number, updateAdminDto: UpdateAdminDto) {
-    return `This action updates a #${id} admin`;
+    try {
+      return this.adminRepository.update(id, updateAdminDto);
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
   remove(id: number) {
-    return `This action removes a #${id} admin`;
+    try {
+      return this.adminRepository.delete(id);
+    } catch (error) {
+      throw new NotFoundException(error);
+    }
   }
 }

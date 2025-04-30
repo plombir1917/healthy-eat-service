@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import { CharacteristicRepository } from './characteristic.repository';
 import { CreateCharacteristicDto } from './dto/create-characteristic.dto';
 import { UpdateCharacteristicDto } from './dto/update-characteristic.dto';
 
 @Injectable()
 export class CharacteristicService {
-  create(createCharacteristicDto: CreateCharacteristicDto) {
-    return 'This action adds a new characteristic';
+  constructor(
+    private readonly characteristicRepository: CharacteristicRepository,
+  ) {}
+
+  async create(createCharacteristicDto: CreateCharacteristicDto) {
+    return this.characteristicRepository.create(createCharacteristicDto);
   }
 
-  findAll() {
-    return `This action returns all characteristic`;
+  async findAll() {
+    return this.characteristicRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} characteristic`;
+  async findOne(id: number) {
+    return this.characteristicRepository.findOne(id);
   }
 
-  update(id: number, updateCharacteristicDto: UpdateCharacteristicDto) {
-    return `This action updates a #${id} characteristic`;
+  async update(id: number, updateCharacteristicDto: UpdateCharacteristicDto) {
+    return this.characteristicRepository.update(id, updateCharacteristicDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} characteristic`;
+  async remove(id: number) {
+    return this.characteristicRepository.remove(id);
   }
 }
