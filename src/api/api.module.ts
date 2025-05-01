@@ -10,9 +10,10 @@ import { CharacteristicModule } from './characteristic/characteristic.module';
 import { RecommendationModule } from './recommendation/recommendation.module';
 import { RequestModule } from './request/request.module';
 import { IllnessOnSymptomeModule } from './illness_on_symptome/illness-on-symptome.module';
-
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
+    AuthModule,
     AdminModule,
     PatientModule,
     DoctorModule,
