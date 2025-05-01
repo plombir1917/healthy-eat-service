@@ -21,7 +21,7 @@ RUN npm run generate
 RUN npm run build
 
 # Указываем порт
-EXPOSE 3001
+EXPOSE 3002
 
 # Запуск приложения
 CMD ["npm","run","migrate:dev"]
