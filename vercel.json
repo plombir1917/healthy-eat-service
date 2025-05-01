@@ -1,7 +1,0 @@
-{
-  "installCommand": "npm install",
-  "buildCommand": "npm run vercel-build",
-  "version": 2,
-  "outputDirectory": "dist",
-  "runCommand": "npm run start:prod"
-}
