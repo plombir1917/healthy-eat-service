@@ -21,11 +21,11 @@ async function bootstrap() {
     .addTag('characteristics', 'Управление характеристиками')
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('healthy-eat/api', app, document);
-
   app.enableCors();
   app.setGlobalPrefix('healthy-eat');
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('healthy-eat/api', app, document);
   await app.listen(process.env.PORT || 3002);
 }
 bootstrap();
