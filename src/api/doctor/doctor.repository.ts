@@ -23,6 +23,12 @@ export class DoctorRepository {
     });
   }
 
+  async findOneByEmail(email: string) {
+    return await this.prisma.doctor.findUniqueOrThrow({
+      where: { login: email },
+    });
+  }
+
   async update(id: number, updateDoctorDto: UpdateDoctorDto) {
     return this.prisma.doctor.update({
       where: { id },

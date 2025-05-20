@@ -22,6 +22,14 @@ export class AdminRepository {
     return this.prisma.admin.findUniqueOrThrow({ where: { id } });
   }
 
+  async findOneByEmail(email: string) {
+    return await this.prisma.admin.findUniqueOrThrow({
+      where: {
+        login: email,
+      },
+    });
+  }
+
   async update(id: number, admin: UpdateAdminDto): Promise<Admin> {
     return this.prisma.admin.update({ where: { id }, data: admin });
   }

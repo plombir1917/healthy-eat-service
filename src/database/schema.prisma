@@ -1,5 +1,6 @@
 //TODO: unnecessary feilds
 // симптомы и заболевания mtm relation
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,6 +8,12 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum role {
+    DOCTOR 
+    ADMIN
+    PATIENT
 }
 
 model patient {
@@ -19,6 +26,7 @@ model patient {
   characteristic characteristic? 
   illnes illness[]  
   request request[]
+  role role @default(PATIENT)
 }
 
 model doctor {
@@ -32,6 +40,8 @@ model doctor {
   admin admin @relation(fields: [admin_id], references: [id])
   admin_id Int
   request request[]
+  role role @default(DOCTOR)
+
 }
 
 model admin {
@@ -41,6 +51,7 @@ model admin {
   login    String @unique
   password String
   doctor doctor[]
+  role role @default(ADMIN)
 }
 
 model illness {

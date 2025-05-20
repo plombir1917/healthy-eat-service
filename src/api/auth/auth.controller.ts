@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   Post,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -14,6 +15,7 @@ import {
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
+import { TokenPayload } from './decorator/token-payload.decorator';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -76,5 +78,13 @@ export class AuthController {
     } catch (error) {
       throw new UnauthorizedException('Неверный логин или пароль!');
     }
+  }
+
+  @Get('token-payload')
+  @ApiBearerAuth()
+  @ApiResponse({ status: 200, description: 'Данные' })
+  @ApiOperation({ summary: 'Получить данные из токена' })
+  async getTokenPayload(@TokenPayload() token: any) {
+    return token;
   }
 }

@@ -19,6 +19,10 @@ export class DoctorService {
     return this.doctorRepository.findOne(id);
   }
 
+  async findOneByEmail(email: string) {
+    return await this.doctorRepository.findOneByEmail(email);
+  }
+
   async update(id: number, updateDoctorDto: UpdateDoctorDto) {
     return this.doctorRepository.update(id, updateDoctorDto);
   }

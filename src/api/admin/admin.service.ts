@@ -31,6 +31,10 @@ export class AdminService {
     }
   }
 
+  async findOneByEmail(email: string) {
+    return await this.adminRepository.findOneByEmail(email);
+  }
+
   update(id: number, updateAdminDto: UpdateAdminDto) {
     try {
       return this.adminRepository.update(id, updateAdminDto);
