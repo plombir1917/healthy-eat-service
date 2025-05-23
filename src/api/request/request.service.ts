@@ -1,26 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRequestDto } from './dto/create-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
+import { RequestRepository } from './request.repository';
 
 @Injectable()
 export class RequestService {
-  create(createRequestDto: CreateRequestDto) {
-    return 'This action adds a new request';
+  constructor(private readonly requestRepository: RequestRepository) {}
+  async create(createRequestDto: CreateRequestDto) {
+    return await this.requestRepository.create(createRequestDto);
   }
 
-  findAll() {
-    return `This action returns all request`;
+  async findAll() {
+    return await this.requestRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} request`;
+  async findOne(id: number) {
+    return await this.requestRepository.findOne(id);
   }
 
-  update(id: number, updateRequestDto: UpdateRequestDto) {
-    return `This action updates a #${id} request`;
+  async update(id: number, updateRequestDto: UpdateRequestDto) {
+    return await this.requestRepository.update(id, updateRequestDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} request`;
+  async remove(id: number) {
+    return await this.requestRepository.delete(id);
   }
 }
