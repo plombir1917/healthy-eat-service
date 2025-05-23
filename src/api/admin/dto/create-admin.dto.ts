@@ -1,5 +1,6 @@
 import {
   IsEmail,
+  IsInt,
   IsNotEmpty,
   IsString,
   IsStrongPassword,
@@ -40,4 +41,9 @@ export class CreateAdminDto {
   @IsString()
   @IsStrongPassword()
   password: string;
+
+  @IsInt()
+  @IsNotEmpty()
+  @ApiProperty()
+  admin_id: number;
 }
