@@ -26,6 +26,8 @@ export class DoctorService {
   }
 
   async update(id: number, updateDoctorDto: UpdateDoctorDto) {
+    if (updateDoctorDto.password)
+      updateDoctorDto.password = await encodePassword(updateDoctorDto.password);
     return this.doctorRepository.update(id, updateDoctorDto);
   }
 

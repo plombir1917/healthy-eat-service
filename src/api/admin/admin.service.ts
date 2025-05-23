@@ -37,8 +37,10 @@ export class AdminService {
     return await this.adminRepository.findOneByEmail(email);
   }
 
-  update(id: number, updateAdminDto: UpdateAdminDto) {
+  async update(id: number, updateAdminDto: UpdateAdminDto) {
     try {
+      if (updateAdminDto.password)
+        updateAdminDto.password = await encodePassword(updateAdminDto.password);
       return this.adminRepository.update(id, updateAdminDto);
     } catch (error) {
       throw new BadRequestException(error);
