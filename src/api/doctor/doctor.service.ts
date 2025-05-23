@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { DoctorRepository } from './doctor.repository';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
+import { encodePassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class DoctorService {
   constructor(private readonly doctorRepository: DoctorRepository) {}
 
   async create(createDoctorDto: CreateDoctorDto) {
+    createDoctorDto.password = await encodePassword(createDoctorDto.password);
     return this.doctorRepository.create(createDoctorDto);
   }
 
