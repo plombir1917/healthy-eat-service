@@ -24,7 +24,7 @@ model patient {
   height   Int?
   weight   Int?
   characteristic characteristic? 
-  illnes illness[]  
+  illness_on_patient illness_on_patient[]  
   request request[]
   role role @default(PATIENT)
 }
@@ -58,10 +58,19 @@ model illness {
   id          Int        @id @default(autoincrement())
   name        String
   description String
-  patient patient? @relation(fields: [patient_id], references: [id])
-  patient_id Int?
+  patient illness_on_patient[]
   diet diet[]
   symptome illness_on_symptome[]
+}
+
+model illness_on_patient {
+  illness illness @relation(fields: [illness_id], references: [id])
+  illness_id Int
+
+  patient patient @relation(fields: [patient_id], references: [id])
+  patient_id Int
+
+  @@id([illness_id, patient_id])
 }
 
 model  illness_on_symptome {
