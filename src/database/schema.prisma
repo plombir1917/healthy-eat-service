@@ -1,5 +1,4 @@
 //TODO: unnecessary feilds
-// симптомы и заболевания mtm relation
 
 generator client {
   provider = "prisma-client-js"
