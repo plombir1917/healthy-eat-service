@@ -1,7 +1,11 @@
-//TODO: unnecessary feilds
-
 generator client {
   provider = "prisma-client-js"
+}
+
+enum status {
+  APPROVED
+  SEND
+  REJECTED 
 }
 
 datasource db {
@@ -127,6 +131,7 @@ model recommendation{
 
 model request {
   id Int @id @default(autoincrement())
+  status status @default(SEND)
   doctor doctor @relation(fields: [doctor_id], references: [id])
   doctor_id Int
   patient patient @relation(fields: [patient_id], references: [id])
