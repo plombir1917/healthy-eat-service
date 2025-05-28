@@ -1,4 +1,4 @@
-import { IsString, IsInt } from 'class-validator';
+import { IsString, IsInt, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateDoctorDto {
@@ -49,5 +49,6 @@ export class CreateDoctorDto {
     example: 1,
   })
   @IsInt()
+  @IsNotEmpty()
   admin_id: number;
 }

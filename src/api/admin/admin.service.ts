@@ -6,13 +6,15 @@ import {
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { AdminRepository } from './admin.repository';
+import { encodePassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class AdminService {
   constructor(private readonly adminRepository: AdminRepository) {}
 
-  create(createAdminDto: CreateAdminDto) {
+  async create(createAdminDto: CreateAdminDto) {
     try {
+      createAdminDto.password = await encodePassword(createAdminDto.password);
       return this.adminRepository.create(createAdminDto);
     } catch (error) {
       throw new BadRequestException(error);
@@ -31,8 +33,14 @@ export class AdminService {
     }
   }
 
-  update(id: number, updateAdminDto: UpdateAdminDto) {
+  async findOneByEmail(email: string) {
+    return await this.adminRepository.findOneByEmail(email);
+  }
+
+  async update(id: number, updateAdminDto: UpdateAdminDto) {
     try {
+      if (updateAdminDto.password)
+        updateAdminDto.password = await encodePassword(updateAdminDto.password);
       return this.adminRepository.update(id, updateAdminDto);
     } catch (error) {
       throw new BadRequestException(error);

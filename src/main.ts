@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { UsePipes, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,11 +22,13 @@ async function bootstrap() {
     .addTag('characteristics', 'Управление характеристиками')
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('healthy-eat/api', app, document);
-
   app.enableCors();
   app.setGlobalPrefix('healthy-eat');
+
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('healthy-eat/api', app, document);
   await app.listen(process.env.PORT || 3002);
 }
 bootstrap();

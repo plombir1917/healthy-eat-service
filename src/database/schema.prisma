@@ -13,6 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum role {
+    DOCTOR 
+    ADMIN
+    PATIENT
+}
+
 model patient {
   id       Int    @id @default(autoincrement())
   name     String
@@ -21,8 +27,9 @@ model patient {
   height   Int?
   weight   Int?
   characteristic characteristic? 
-  illnes illness[]  
+  illness_on_patient illness_on_patient[]  
   request request[]
+  role role @default(PATIENT)
 }
 
 model doctor {
@@ -36,6 +43,8 @@ model doctor {
   admin admin @relation(fields: [admin_id], references: [id])
   admin_id Int
   request request[]
+  role role @default(DOCTOR)
+
 }
 
 model admin {
@@ -45,16 +54,26 @@ model admin {
   login    String @unique
   password String
   doctor doctor[]
+  role role @default(ADMIN)
 }
 
 model illness {
   id          Int        @id @default(autoincrement())
   name        String
   description String
-  patient patient? @relation(fields: [patient_id], references: [id])
-  patient_id Int?
+  patient illness_on_patient[]
   diet diet[]
   symptome illness_on_symptome[]
+}
+
+model illness_on_patient {
+  illness illness @relation(fields: [illness_id], references: [id])
+  illness_id Int
+
+  patient patient @relation(fields: [patient_id], references: [id])
+  patient_id Int
+
+  @@id([illness_id, patient_id])
 }
 
 model  illness_on_symptome {

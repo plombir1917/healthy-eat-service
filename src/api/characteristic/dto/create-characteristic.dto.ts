@@ -24,5 +24,5 @@ export class CreateCharacteristicDto {
   })
   @IsNotEmpty()
   @IsNumber()
-  patientId: number;
+  patient_id: number;
 }

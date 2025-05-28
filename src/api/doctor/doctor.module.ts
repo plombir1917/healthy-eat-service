@@ -8,5 +8,6 @@ import { PrismaModule } from '../../database/prisma.module';
   imports: [PrismaModule],
   controllers: [DoctorController],
   providers: [DoctorService, DoctorRepository],
+  exports: [DoctorService],
 })
 export class DoctorModule {}

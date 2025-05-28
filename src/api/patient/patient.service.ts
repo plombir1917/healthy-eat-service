@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PatientRepository } from './patient.repository';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
+import { encodePassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class PatientService {
@@ -24,6 +25,10 @@ export class PatientService {
   }
 
   async update(id: number, updatePatientDto: UpdatePatientDto) {
+    if (updatePatientDto.password)
+      updatePatientDto.password = await encodePassword(
+        updatePatientDto.password,
+      );
     return this.patientRepository.update(id, updatePatientDto);
   }
 
