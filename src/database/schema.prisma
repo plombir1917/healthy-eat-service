@@ -43,6 +43,7 @@ model doctor {
   admin admin @relation(fields: [admin_id], references: [id])
   admin_id Int
   request request[]
+  recommendation recommendation[]
   role role @default(DOCTOR)
 
 }
@@ -125,6 +126,8 @@ model characteristic {
 model recommendation{
   id Int @id @default(autoincrement())
   diet diet @relation(fields: [diet_id], references: [id])
+  doctor doctor @relation(fields: [doctor_id], references: [id])
+  doctor_id Int
   diet_id Int
   request request[]
 }
