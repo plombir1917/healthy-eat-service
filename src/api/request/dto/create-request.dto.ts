@@ -1,4 +1,4 @@
-import { IsInt, IsOptional } from 'class-validator';
+import { IsInt, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateRequestDto {
@@ -30,7 +30,7 @@ export class CreateRequestDto {
     example: 'SEND',
     required: false,
   })
-  @IsInt()
+  @IsString()
   @IsOptional()
   status?: string;
 }
