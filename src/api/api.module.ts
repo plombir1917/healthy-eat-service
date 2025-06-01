@@ -11,6 +11,7 @@ import { RecommendationModule } from './recommendation/recommendation.module';
 import { RequestModule } from './request/request.module';
 import { IllnessOnSymptomeModule } from './illness_on_symptome/illness-on-symptome.module';
 import { AuthModule } from './auth/auth.module';
+import { IllnessOnPatientModule } from './illness_on_patient/illness_on_patient.module';
 @Module({
   imports: [
     AuthModule,
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
     RecommendationModule,
     RequestModule,
     IllnessOnSymptomeModule,
+    IllnessOnPatientModule,
   ],
 })
 export class ApiModule {}
