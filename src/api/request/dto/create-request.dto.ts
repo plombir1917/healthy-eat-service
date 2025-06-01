@@ -24,4 +24,13 @@ export class CreateRequestDto {
   @IsInt()
   @IsOptional()
   recommendation_id?: number;
+
+  @ApiProperty({
+    description: 'Статус (опционально)',
+    example: 'SEND',
+    required: false,
+  })
+  @IsInt()
+  @IsOptional()
+  status?: string;
 }
