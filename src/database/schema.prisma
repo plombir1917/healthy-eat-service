@@ -26,7 +26,7 @@ model patient {
   password String
   height   Int?
   weight   Int?
-  characteristic characteristic? 
+  characteristic characteristic[]
   illness_on_patient illness_on_patient[]  
   request request[]
   role role @default(PATIENT)
@@ -118,8 +118,8 @@ model characteristic {
   id          Int    @id @default(autoincrement())
   intolerance String
   preference  String
-  patient patient? @relation(fields: [patient_id], references: [id])
-  patient_id Int? @unique
+  patient patient @relation(fields: [patient_id], references: [id])
+  patient_id Int @unique
 }
 
 model recommendation{
