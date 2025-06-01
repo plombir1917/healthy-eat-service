@@ -119,7 +119,7 @@ model characteristic {
   intolerance String
   preference  String
   patient patient @relation(fields: [patient_id], references: [id])
-  patient_id Int @unique
+  patient_id Int 
 }
 
 model recommendation{
