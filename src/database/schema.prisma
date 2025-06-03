@@ -135,8 +135,8 @@ model recommendation{
 model request {
   id Int @id @default(autoincrement())
   status status @default(SEND)
-  doctor doctor @relation(fields: [doctor_id], references: [id])
-  doctor_id Int
+  doctor doctor? @relation(fields: [doctor_id], references: [id])
+  doctor_id Int?
   patient patient @relation(fields: [patient_id], references: [id])
   patient_id Int
   recommendation recommendation? @relation(fields: [recommendation_id], references: [id])

@@ -7,7 +7,8 @@ export class CreateRequestDto {
     example: 1,
   })
   @IsInt()
-  doctor_id: number;
+  @IsOptional()
+  doctor_id?: number;
 
   @ApiProperty({
     description: 'ID пациента',
