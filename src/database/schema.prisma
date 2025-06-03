@@ -141,4 +141,5 @@ model request {
   patient_id Int
   recommendation recommendation? @relation(fields: [recommendation_id], references: [id])
   recommendation_id Int?
+  description String?
 }
