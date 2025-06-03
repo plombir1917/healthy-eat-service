@@ -130,6 +130,7 @@ model recommendation{
   doctor_id Int
   diet_id Int
   request request[]
+  description String?
 }
 
 model request {

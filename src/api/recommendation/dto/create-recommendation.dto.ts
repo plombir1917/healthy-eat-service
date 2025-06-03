@@ -1,4 +1,4 @@
-import { IsInt } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateRecommendationDto {
@@ -15,4 +15,8 @@ export class CreateRecommendationDto {
   })
   @IsInt()
   doctor_id: number;
+
+  @IsString()
+  @IsOptional()
+  description?: string;
 }
