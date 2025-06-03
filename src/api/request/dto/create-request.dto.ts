@@ -34,4 +34,8 @@ export class CreateRequestDto {
   @IsString()
   @IsOptional()
   status?: string;
+
+  @IsString()
+  @IsOptional()
+  description?: string;
 }
